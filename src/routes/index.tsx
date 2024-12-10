@@ -175,7 +175,7 @@ function Index() {
       {!currentAccount ? (
         <Card>
           <CardContent className='flex items-center justify-center p-6'>
-            <p className='text-gray-500'>Connect your wallet</p>
+            <p className='text-white'>Connect your wallet</p>
           </CardContent>
         </Card>
       ) : (

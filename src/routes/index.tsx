@@ -171,152 +171,306 @@ function Index() {
   };
 
   return (
-    <main className='container mx-auto p-4 space-y-4'>
-      {!currentAccount ? (
-        <Card>
-          <CardContent className='flex items-center justify-center p-6'>
-            <p className='text-white'>Connect your wallet</p>
+    // <main className='container mx-auto p-4 space-y-4'>
+    //   {!currentAccount ? (
+    //     <Card>
+    //       <CardContent className='flex items-center justify-center p-6'>
+    //         <p className='text-white'>Connect your wallet</p>
+    //       </CardContent>
+    //     </Card>
+    //   ) : (
+    //     <>
+    //       {/* Mint NFT Card */}
+    //       <Card>
+    //         <CardHeader>
+    //           <CardTitle>Mint NFT</CardTitle>
+    //         </CardHeader>
+    //         <CardContent className="bg-red-600 " >
+    //           <Input
+    //             placeholder='Token URI'
+    //             value={tokenURI}
+    //             onChange={e => setTokenURI(e.target.value)}
+    //           />
+    //         </CardContent>
+    //         <CardFooter>
+    //           <Button onClick={handleMintNFT} disabled={!tokenURI}>
+    //             <Plus className='mr-2 h-4 w-4' /> Mint
+    //           </Button>
+    //         </CardFooter>
+    //       </Card>
+
+    //       {/* Owned NFTs */}
+    //       <Card>
+    //         <CardHeader>
+    //           <CardTitle>Your NFTs</CardTitle>
+    //         </CardHeader>
+    //         <CardContent>
+    //           {fetchingBalanceNFTs || waitingForTxn ? (
+    //             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+    //               {[...Array(6)].map((_, i) => (
+    //                 <Card key={i} className='animate-pulse'>
+    //                   <CardContent className='p-4'>
+    //                     <div className='w-full h-40 bg-gray-200 rounded-lg mb-2'></div>
+    //                     <div className='h-4 bg-gray-200 rounded w-2/3 mb-2'></div>
+    //                     <div className='h-4 bg-gray-200 rounded w-1/2'></div>
+    //                   </CardContent>
+    //                 </Card>
+    //               ))}
+    //             </div>
+    //           ) : ownedNFTs.length === 0 ? (
+    //             <div className='text-center p-4'>No NFTs found</div>
+    //           ) : (
+    //             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+    //               {ownedNFTs.map((nft, index) => (
+    //                 <Card
+    //                   key={`nft ${nft.tokenId}-${index}`}
+    //                   onClick={() => setSelectedTokenId(nft.tokenId)}
+    //                   className={`cursor-pointer ${selectedTokenId === nft.tokenId ? 'ring-2 ring-blue-500' : ''}`}
+    //                 >
+    //                   <CardContent className='p-4'>
+    //                     <img
+    //                       src={nft.uri || '/api/placeholder/200/200'}
+    //                       alt={`nft ${nft.tokenId}-${index}`}
+    //                       className='w-full h-40 object-cover rounded-lg mb-2'
+    //                     />
+    //                     <h3 className='font-semibold'>
+    //                       Token ID: {nft.tokenId}
+    //                     </h3>
+    //                   </CardContent>
+    //                 </Card>
+    //               ))}
+    //             </div>
+    //           )}
+    //         </CardContent>
+    //         <CardFooter>
+    //           <Button
+    //             onClick={() => refetchBalanceNFTs()}
+    //             disabled={fetchingBalanceNFTs || waitingForTxn}
+    //           >
+    //             <Loader2
+    //               className={`mr-2 h-4 w-4 ${fetchingBalanceNFTs || waitingForTxn ? 'animate-spin' : ''}`}
+    //             />
+    //             Refresh
+    //           </Button>
+    //         </CardFooter>
+    //       </Card>
+
+    //       {/* Transfer NFT */}
+    //       {selectedTokenId !== null && (
+    //         <Card>
+    //           <CardHeader>
+    //             <CardTitle>Transfer NFT</CardTitle>
+    //           </CardHeader>
+    //           <CardContent>
+    //             <Input
+    //               placeholder='Recipient Address'
+    //               value={transferAddress}
+    //               onChange={e => setTransferAddress(e.target.value)}
+    //             />
+    //           </CardContent>
+    //           <CardFooter>
+    //             <Button
+    //               onClick={handleTransferNFT}
+    //               disabled={!isAddress(transferAddress)}
+    //             >
+    //               <Send className='mr-2 h-4 w-4' /> Transfer
+    //             </Button>
+    //           </CardFooter>
+    //         </Card>
+    //       )}
+
+    //       {/* Error and Transaction Status Display */}
+    //       {error && (
+    //         <Alert variant='destructive'>
+    //           <AlertCircle className='h-4 w-4' />
+    //           <AlertTitle>Error</AlertTitle>
+    //           <AlertDescription>{error}</AlertDescription>
+    //         </Alert>
+    //       )}
+
+    //       {fetchingBalanceNFTs ||
+    //         (waitingForTxn && (
+    //           <Alert variant='default'>
+    //             <Loader className='mr-2 h-4 w-4 animate-spin' />
+    //             <AlertDescription>
+    //               {fetchingBalanceNFTs
+    //                 ? 'Fetching owned NFTs...'
+    //                 : 'Transaction in progress...'}
+    //             </AlertDescription>
+    //           </Alert>
+    //         ))}
+
+    //       {/* Error Handling */}
+    //       {txIsSuccess && (
+    //         <Alert variant='default'>
+    //           <AlertDescription>Transaction successful!</AlertDescription>
+    //         </Alert>
+    //       )}
+
+    //       {txIsError && (
+    //         <Alert variant='destructive'>
+    //           <AlertCircle className='h-4 w-4' />
+    //           <AlertTitle>Transaction Error</AlertTitle>
+    //           <AlertDescription>{txError?.message}</AlertDescription>
+    //         </Alert>
+    //       )}
+    //     </>
+    //   )}
+    // </main>
+<main className='container mx-auto p-4 space-y-8'>
+  <div className='flex flex-col items-center justify-center min-h-screen'>
+    {!currentAccount ? (
+      <Card className='w-full max-w-md text-center'>
+        <CardContent className='p-6 bg-gray-800 text-white rounded-lg shadow-md'>
+          <h2 className='text-xl font-bold mb-4'>Connect Your Wallet</h2>
+          <p>Connect your wallet to access NFT features.</p>
+        </CardContent>
+      </Card>
+    ) : (
+      <>
+        {/* Mint NFT Card */}
+        <Card className='w-full max-w-md mb-8 bg-[#6654F1]'>
+          <CardHeader>
+            <CardTitle>Mint NFT</CardTitle>
+          </CardHeader>
+
+          <CardContent className="">
+            <Input
+            className='text-[#23054d] bg-white border-none outline-none focus:border-none focus:outline-none '
+              placeholder='Token URI'
+              value={tokenURI}
+              onChange={e => setTokenURI(e.target.value)}
+            />
           </CardContent>
+          <CardFooter className='flex justify-center pt-4'>
+            <Button onClick={handleMintNFT} disabled={!tokenURI}>
+              <Plus className='mr-2 h-4 w-4' /> Mint
+            </Button>
+            <Button onClick={() => {}} className='ml-4 bg-blue-500 text-white border border-blue-500 hover:bg-blue-600 hover:text-white transition duration-300 ease-in-out'>Transfer</Button>
+          </CardFooter>
         </Card>
-      ) : (
-        <>
-          {/* Mint NFT Card */}
-          <Card>
+
+        {/* Owned NFTs */}
+        <Card className='w-full max-w-md mb-8'>
+          <CardHeader>
+            <CardTitle>Your NFTs</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {fetchingBalanceNFTs || waitingForTxn ? (
+              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+                {[...Array(6)].map((_, i) => (
+                  <Card key={i} className='animate-pulse'>
+                    <CardContent className='p-4'>
+                      <div className='w-full h-40 bg-gray-200 rounded-lg mb-2'></div>
+                      <div className='h-4 bg-gray-200 rounded w-2/3 mb-2'></div>
+                      <div className='h-4 bg-gray-200 rounded w-1/2'></div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ) : ownedNFTs.length === 0 ? (
+              <div className='text-center p-4'>No NFTs found</div>
+            ) : (
+              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+                {ownedNFTs.map((nft, index) => (
+                  <Card
+                    key={`nft ${nft.tokenId}-${index}`}
+                    onClick={() => setSelectedTokenId(nft.tokenId)}
+                    className={`cursor-pointer ${selectedTokenId === nft.tokenId ? 'ring-2 ring-blue-500' : ''}`}
+                  >
+                    <CardContent className='p-4'>
+                      <img
+                        src={nft.uri || '/api/placeholder/200/200'}
+                        alt={`nft ${nft.tokenId}-${index}`}
+                        className='w-full h-40 object-cover rounded-lg mb-2'
+                      />
+                      <h3 className='font-semibold'>
+                        Token ID: {nft.tokenId}
+                      </h3>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
+          </CardContent>
+          <CardFooter>
+            <Button
+              onClick={() => refetchBalanceNFTs()}
+              disabled={fetchingBalanceNFTs || waitingForTxn}
+            >
+              <Loader2
+                className={`mr-2 h-4 w-4 ${fetchingBalanceNFTs || waitingForTxn ? 'animate-spin' : ''}`}
+              />
+              Refresh
+            </Button>
+          </CardFooter>
+        </Card>
+
+        {/* Transfer NFT */}
+        {selectedTokenId !== null && (
+          <Card className='w-full max-w-md mb-8'>
             <CardHeader>
-              <CardTitle>Mint NFT</CardTitle>
+              <CardTitle>Transfer NFT</CardTitle>
             </CardHeader>
             <CardContent>
               <Input
-                placeholder='Token URI'
-                value={tokenURI}
-                onChange={e => setTokenURI(e.target.value)}
+                placeholder='Recipient Address'
+                value={transferAddress}
+                onChange={e => setTransferAddress(e.target.value)}
               />
             </CardContent>
-            <CardFooter>
-              <Button onClick={handleMintNFT} disabled={!tokenURI}>
-                <Plus className='mr-2 h-4 w-4' /> Mint
-              </Button>
-            </CardFooter>
-          </Card>
-
-          {/* Owned NFTs */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Your NFTs</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {fetchingBalanceNFTs || waitingForTxn ? (
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-                  {[...Array(6)].map((_, i) => (
-                    <Card key={i} className='animate-pulse'>
-                      <CardContent className='p-4'>
-                        <div className='w-full h-40 bg-gray-200 rounded-lg mb-2'></div>
-                        <div className='h-4 bg-gray-200 rounded w-2/3 mb-2'></div>
-                        <div className='h-4 bg-gray-200 rounded w-1/2'></div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              ) : ownedNFTs.length === 0 ? (
-                <div className='text-center p-4'>No NFTs found</div>
-              ) : (
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-                  {ownedNFTs.map((nft, index) => (
-                    <Card
-                      key={`nft ${nft.tokenId}-${index}`}
-                      onClick={() => setSelectedTokenId(nft.tokenId)}
-                      className={`cursor-pointer ${selectedTokenId === nft.tokenId ? 'ring-2 ring-blue-500' : ''}`}
-                    >
-                      <CardContent className='p-4'>
-                        <img
-                          src={nft.uri || '/api/placeholder/200/200'}
-                          alt={`nft ${nft.tokenId}-${index}`}
-                          className='w-full h-40 object-cover rounded-lg mb-2'
-                        />
-                        <h3 className='font-semibold'>
-                          Token ID: {nft.tokenId}
-                        </h3>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              )}
-            </CardContent>
-            <CardFooter>
+            <CardFooter className='flex justify-center pt-4'>
               <Button
-                onClick={() => refetchBalanceNFTs()}
-                disabled={fetchingBalanceNFTs || waitingForTxn}
+                onClick={handleTransferNFT}
+                disabled={!isAddress(transferAddress)}
               >
-                <Loader2
-                  className={`mr-2 h-4 w-4 ${fetchingBalanceNFTs || waitingForTxn ? 'animate-spin' : ''}`}
-                />
-                Refresh
+                <Send className='mr-2 h-4 w-4' /> Transfer
               </Button>
             </CardFooter>
           </Card>
+        )}
 
-          {/* Transfer NFT */}
-          {selectedTokenId !== null && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Transfer NFT</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Input
-                  placeholder='Recipient Address'
-                  value={transferAddress}
-                  onChange={e => setTransferAddress(e.target.value)}
-                />
-              </CardContent>
-              <CardFooter>
-                <Button
-                  onClick={handleTransferNFT}
-                  disabled={!isAddress(transferAddress)}
-                >
-                  <Send className='mr-2 h-4 w-4' /> Transfer
-                </Button>
-              </CardFooter>
-            </Card>
-          )}
+        {/* Error and Transaction Status Display */}
+        {error && (
+          <Alert variant='destructive'>
+            <AlertCircle className='h-4 w-4' />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
 
-          {/* Error and Transaction Status Display */}
-          {error && (
-            <Alert variant='destructive'>
-              <AlertCircle className='h-4 w-4' />
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          )}
-
-          {fetchingBalanceNFTs ||
-            (waitingForTxn && (
-              <Alert variant='default'>
-                <Loader className='mr-2 h-4 w-4 animate-spin' />
-                <AlertDescription>
-                  {fetchingBalanceNFTs
-                    ? 'Fetching owned NFTs...'
-                    : 'Transaction in progress...'}
-                </AlertDescription>
-              </Alert>
-            ))}
-
-          {/* Error Handling */}
-          {txIsSuccess && (
+        {fetchingBalanceNFTs ||
+          (waitingForTxn && (
             <Alert variant='default'>
-              <AlertDescription>Transaction successful!</AlertDescription>
+              <Loader className='mr-2 h-4 w-4 animate-spin' />
+              <AlertDescription>
+                {fetchingBalanceNFTs
+                  ? 'Fetching owned NFTs...'
+                  : 'Transaction in progress...'}
+              </AlertDescription>
             </Alert>
-          )}
+          ))}
 
-          {txIsError && (
-            <Alert variant='destructive'>
-              <AlertCircle className='h-4 w-4' />
-              <AlertTitle>Transaction Error</AlertTitle>
-              <AlertDescription>{txError?.message}</AlertDescription>
-            </Alert>
-          )}
-        </>
-      )}
-    </main>
+        {txIsSuccess && (
+          <Alert variant='default'>
+            <AlertDescription>Transaction successful!</AlertDescription>
+          </Alert>
+        )}
+
+        {txIsError && (
+          <Alert variant='destructive'>
+            <AlertCircle className='h-4 w-4' />
+            <AlertTitle>Transaction Error</AlertTitle>
+            <AlertDescription>{txError?.message}</AlertDescription>
+          </Alert>
+        )}
+      </>
+    )}
+  </div>
+</main>
+
+
+    
   );
 }
 

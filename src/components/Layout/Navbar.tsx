@@ -10,12 +10,12 @@ const Navbar = () => {
         {/* navbar  */}{' '}
         <nav className='flex flex-col md:flex-row md:space-x-6 space-y-4 md:space-y-0'>
           {' '}
-          <ul className='flex items-center justify-center space-x-6'>
+          <ul className='flex items-center justify-center space-x-6 capitalize '>
             {' '}
             <li>
               {' '}
               <Link
-                to='/'
+                to='https://nft-eight-eta.vercel.app'
                 activeProps={{
                   className:
                     'font-bold hover:text-[#2F80ED] transition duration-300',
@@ -54,7 +54,7 @@ const Navbar = () => {
                     'font-bold hover:text-[#2F80ED] transition duration-300',
                 }}
               >
-                create
+                About
               </Link>
             </li>
             <li>

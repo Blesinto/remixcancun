@@ -7,9 +7,10 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { QueryClient } from '@tanstack/react-query';
 
 import React, { Suspense } from 'react';
-import { ConnectWallet } from '@/components/connect-wallet';
+// import { ConnectWallet } from '@/components/connect-wallet';
 import Navbar from '@/components/Layout/Navbar';
-import Hero from '@/components/Layout/Hero';
+// import Hero from '@/components/Layout/Hero';
+import Footer from '../components/Layout/Footer';
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -42,7 +43,7 @@ function RootComponent() {
     <>
       <Navbar />
       <Outlet />
-      <Hero/>
+      <Footer/>
 
       <ReactQueryDevtools buttonPosition='bottom-right' />
       <Suspense>

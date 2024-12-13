@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract RemixCancunNFT is ERC721URIStorage, Ownable {
+contract RemixCancunNFT is ERC721, ERC721URIStorage, Ownable {
     uint256 public tokenCounter;
     uint256 public maxNFTsPerUser;
     mapping(address => uint256) public nftCountPerUser;
